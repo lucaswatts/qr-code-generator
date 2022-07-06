@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+//WIFI:T:WPA;S:BMG;P:********;H:; example of our home wifi decoded. Need to add the information in as it is here 
+
 function App() {
   const [temp, setTemp] = useState("");
   const [word, setWord] = useState("");
