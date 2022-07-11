@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from 'react';
+import Wifi from './components/Wifi';
 import './App.css';
 
 //WIFI:T:WPA;S:BMG;P:********;H:; example of our home wifi decoded. Need to add the information in as it is here 
 
 function App() {
   const [temp, setTemp] = useState("");
-  const [word, setWord] = useState("");
-  const [size, setSize] = useState(400);
+  const [networkname, setNetworkname] = useState("");
+  const [password, setPassword] = useState("");
+  const [size, setSize] = useState(200);
   const [bgColor, setBgColor] = useState("ffffff");
   const [qrCode, setQrCode] = useState("");
   // Changing the URL only when the user
   // changes the input
   useEffect(() => {
     setQrCode
- (`http://api.qrserver.com/v1/create-qr-code/?data=${word}!&size=${size}x${size}&bgcolor=${bgColor}`);
-  }, [word, size, bgColor]);
+ (`http://api.qrserver.com/v1/create-qr-code/?data=${`WIFI:T:WPA;S:${networkname};P:${password};H:;`}!&size=${size}x${size}&bgcolor=${bgColor}`);
+  }, [networkname, size, bgColor]);
   
-  // Updating the input word when user
+  // Updating the input network name when user
   // click on the generate button
   function handleClick() {
-    setWord(temp);
+    setNetworkname(temp);
   }
   
   return (
     <div className="App">
-      <h1>QR Code Generator</h1>
+      <h1 className="h1">Wifi QR Code Generator</h1>
       <div className="input-box">
+        <Wifi></Wifi>
         <div className="gen">
           <input type="text" onChange={
             (e) => {setTemp(e.target.value)}}
             placeholder="Enter text to encode" />
+            <input type="text" onChange={
+            (e) => {setPassword(e.target.value)}}
+            placeholder="Enter your wifi password" />
           <button className="button" 
             onClick={handleClick}>
             Generate
